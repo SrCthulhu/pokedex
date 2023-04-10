@@ -49,7 +49,7 @@ export default function Card({ pokemon }) {
                 styles.container,
                 { backgroundColor: colors[data?.types[0]?.type?.name] },
             ]}>
-            <TouchableOpacity onPress={() => saveFavorites(pokemon)}>
+            <TouchableOpacity onPress={() => addFavorite(pokemon)}>
                 {
                     isFavorite && <Icon name="heart" size={40} color="#E04C50" /> // If corazon rojo (item agregado a la lista)
                 }
