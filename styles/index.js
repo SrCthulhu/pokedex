@@ -7,7 +7,303 @@ para que en todos los moviles se vea igual.
 */
 const { height } = Dimensions.get('screen');
 
-// Exportamos cada estilo para cada componente o vista 
+export const loginStyles = StyleSheet.create({
+    mainContainer: {
+        flex: 1,
+    },
+    container: {
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    gradientContainer: {
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+    },
+    gradientImage: {
+        width: 500,
+        height: 500,
+        position: 'absolute',
+    },
+    title: {
+        paddingTop: 80,
+        fontSize: 70,
+        color: '#1E2D3E',
+        fontWeight: 'bold',
+        alignSelf: 'flex-start',
+        paddingLeft: 20
+    },
+    subTitle: {
+        fontSize: 20,
+        color: '#fff',
+        alignSelf: 'flex-start',
+        paddingLeft: 20
+    },
+    imageContainer: {
+        marginTop: 30,
+        marginBottom: 10,
+    },
+    image: {
+        width: 100,
+        height: 100,
+        alignSelf: "center",
+        position: 'absolute'
+    },
+    textInputStyle: {
+        padding: 10,
+        paddingStart: 30,
+        width: '90%',
+        height: 50,
+        marginTop: 20,
+        borderRadius: 30,
+        backgroundColor: '#fff',
+        elevation: 10,
+    },
+    textSecondary: {
+        paddingTop: 5,
+        color: '#fff',
+        alignSelf: 'flex-end',
+        paddingRight: 25,
+        paddingBottom: 90
+    },
+    registryContainer: {
+        marginTop: 35
+    },
+    textRegistry: {
+        paddingTop: 70,
+        color: '#000',
+        alignSelf: 'center',
+    },
+});
+export const ButtonGradientStyle = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        width: 150,
+        marginTop: 20,
+    },
+    button: {
+        width: '90%',
+        height: 50,
+        borderRadius: 25,
+        padding: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    text: {
+        fontSize: 14,
+        color: '#fff',
+        fontWeight: 'bold'
+    }
+});
+export const ButtonGradientRegistryStyle = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        width: 150,
+        marginTop: 20,
+        marginLeft: -10
+    },
+    button: {
+        width: '90%',
+        height: 50,
+        borderRadius: 25,
+        padding: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    text: {
+        fontSize: 14,
+        color: '#fff',
+        fontWeight: 'bold'
+    }
+});
+export const registryStyles = StyleSheet.create({
+    mainContainer: {
+        flex: 1,
+    },
+    container: {
+        justifyContent: 'center',
+        marginLeft: 30,
+        marginRight: 30
+    },
+    backgroundImageContainer: {
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+    },
+    image: {
+        width: '100%',
+        height: 660,
+        alignSelf: 'center',
+        position: 'absolute'
+    },
+    title: {
+        fontSize: 30,
+        color: '#FFF',
+        fontWeight: 'bold',
+        marginBottom: 8,
+        marginTop: 20,
+    },
+    textInputStyle: {
+        paddingStart: 15,
+        height: 50,
+        marginTop: 15,
+        borderRadius: 30,
+        backgroundColor: '#fff',
+        elevation: 15,
+        justifyContent: 'center',
+
+    },
+    buttonRegistryStyle: {
+        marginLeft: -100
+    }
+});
+export const avatarScreenStyles = StyleSheet.create({
+    container: {
+        flex: 1,
+        marginBottom: 15,
+    },
+    header: {
+        paddingTop: 12,
+        backgroundColor: "#E00004",
+        paddingBottom: 12,
+    },
+    categoryContainer: {
+        paddingTop: 12,
+        backgroundColor: "#1E2D3E",
+        paddingBottom: 12,
+    },
+    categoryDescription: {
+        paddingLeft: 18,
+        fontSize: 15,
+        color: '#FFF'
+    },
+    innercontainer: {
+        marginTop: 10,
+        marginLeft: 10,
+        marginRight: 10,
+        flexDirection: 'row',
+        marginBottom: 10
+
+    },
+    titleHeader: {
+        color: "#FFF",
+        fontSize: 20,
+        fontWeight: 'bold',
+        paddingLeft: 18,
+    },
+    imageContainer: {
+        marginTop: 10,
+        bottom: 20,
+        right: 80
+    },
+    image: {
+        width: 95,
+        height: 95,
+        resizeMode: 'contain',
+        position: 'absolute',
+        justifyContent: 'center'
+    },
+    circle: {
+        marginTop: 5,
+        width: 70,
+        height: 70,
+        borderRadius: 100,
+    },
+    nameTitle: {
+        color: "#000",
+        fontSize: 16,
+        paddingLeft: 10,
+        marginTop: 10
+    },
+    description: {
+        paddingLeft: 10,
+        marginRight: 10,
+        fontSize: 14,
+    },
+    descriptioncontainer: {
+        flex: 1,
+        flexDirection: 'column',
+    },
+    separator: {
+        flexDirection: 'column',
+        marginTop: 20,
+        flex: 1,
+        borderTopWidth: 1,
+        marginLeft: 10,
+        marginRight: 10,
+        borderColor: '#E0E6ED'
+    },
+});
+export const pokemonSelectionStyles = StyleSheet.create({
+    container: {
+        flex: 1,
+    },
+    dialogSquare: {
+        paddingTop: 12,
+        backgroundColor: "#E00004",
+        paddingBottom: 12,
+    },
+    titleSquare: {
+        color: "#FFF",
+        fontSize: 20,
+        fontWeight: 'bold',
+        paddingLeft: 18,
+    },
+    backgroundImage: {
+        width: '100%',
+        height: height * 0.90,
+        alignSelf: 'center',
+        justifyContent: 'center',
+    },
+    imageContainer: {
+        marginTop: 10,
+        marginLeft: 10,
+        marginRight: 10,
+        flexDirection: 'row',
+        marginBottom: 10
+    },
+    image: {
+        width: 95,
+        height: 95,
+        resizeMode: 'contain',
+        position: 'absolute',
+        justifyContent: 'center'
+    },
+});
+export const homeStyles = StyleSheet.create({
+    container: {
+        marginLeft: '5%',
+        marginTop: 20
+    },
+    conditions: {
+        color: '#000',
+        alignItems: "center",
+    }
+});
+export const headerStyles = StyleSheet.create({
+    container: {
+        marginRight: '5%',
+        marginBottom: 20,
+    },
+    title: {
+        fontSize: 28,
+        color: '#000',
+        fontWeight: 'bold',
+    },
+    description: {
+        fontSize: 16,
+        color: '#000',
+        marginTop: 10,
+    },
+    search: {
+        borderWidth: 1.5,
+        borderColor: '#1E2D3E',
+        borderRadius: 15,
+        marginTop: 15,
+        paddingLeft: 20,
+    },
+
+});
 export const cardStyles = StyleSheet.create({
     container: {
         width: '45%',
@@ -47,31 +343,8 @@ export const cardStyles = StyleSheet.create({
     },
 });
 
-export const headerStyles = StyleSheet.create({
-    container: {
-        marginRight: '5%',
-        marginBottom: 20,
-    },
-    title: {
-        fontSize: 28,
-        color: '#000',
-        fontWeight: 'bold',
-    },
-    description: {
-        fontSize: 16,
-        color: '#000',
-        marginTop: 10,
-    },
-    search: {
-        backgroundColor: '#18BDB2',
-        borderRadius: 20,
-        marginTop: 20,
-        paddingLeft: 20,
-    },
 
-});
-
-export const favoritesStyles = StyleSheet.create({
+export const collectedStyles = StyleSheet.create({
     container: {
         marginLeft: '5%',
         marginRight: '5%',
@@ -79,16 +352,7 @@ export const favoritesStyles = StyleSheet.create({
     },
 });
 
-export const homeStyles = StyleSheet.create({
-    container: {
-        marginLeft: '5%',
-        marginTop: 20
-    },
-    conditions: {
-        color: '#000',
-        alignItems: "center",
-    }
-});
+
 export const aboutStyles = StyleSheet.create({
     container: {
         marginLeft: '5%',
@@ -113,96 +377,5 @@ export const aboutStyles = StyleSheet.create({
         height: 200,
         alignSelf: "center",
         borderRadius: 100
-    },
-});
-export const loginStyles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: "center",
-        marginLeft: 18,
-        marginRight: 18,
-    },
-    title: {
-        fontSize: 28,
-        color: '#000',
-        fontWeight: 'bold',
-        alignSelf: "center",
-    },
-    imageContainer: {
-        marginTop: 10,
-        marginBottom: 10,
-    },
-    image: {
-        width: 100,
-        height: 100,
-        alignSelf: "center",
-    },
-    textInputStyle: {
-        backgroundColor: "#FFF",
-        // Espaciado entre inputs
-        padding: 6,
-        marginTop: 4,
-        marginBottom: 12,
-        fontSize: 16,
-        color: "black",
-    },
-    textPrimary: {
-        color: "#000"
-    },
-    buttonStyle: {
-        backgroundColor: "#BD3736",
-    },
-    textSecondary: {
-        marginTop: 10,
-        marginBottom: 10,
-    },
-    buttonStyle2: {
-        backgroundColor: "gray",
-    },
-    buttonStyle3: {
-        backgroundColor: "#18BDB2",
-    },
-});
-export const registryStyles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: "center",
-        marginLeft: 18,
-        marginRight: 18,
-        marginBottom: 15,
-        marginTop: 15,
-    },
-    title: {
-        fontSize: 28,
-        color: '#000',
-        fontWeight: 'bold',
-        marginBottom: 12,
-    },
-    textInputStyle: {
-        backgroundColor: "#FFF",
-        padding: 6,
-        marginTop: 4,
-        marginBottom: 12,
-        fontSize: 16,
-        color: "black",
-    },
-    textPrimary: {
-        color: "#000"
-    },
-    buttonStyle: {
-        backgroundColor: "#18BDB2",
-    },
-    headerContainer: {
-        height: 250,
-        //justificamos con respecto a la altura del contenedor (no a la derecha todavía)
-        justifyContent: "center",
-        alignSelf: "center",
-        paddingLeft: 12,
-        paddingRight: 12,
-        marginBottom: 12,
-    },
-    image: {
-        width: 370,
-        height: 250,
     },
 });

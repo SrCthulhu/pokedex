@@ -1,12 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { View, Text, TextInput, Button, Alert, Image } from 'react-native';
 import { LOCALHOST } from '../constants';
 import { registryStyles as styles } from '../styles';
+import ButtonGradientRegistry from "../components/ButtonGradientRegistry";
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export default function Registry({ navigation }) {
     const [user, setNewUser] = useState('')
     const [email, setNewEmail] = useState('')
     const [pass, setNewPass] = useState('')
+    const [validatePass, setValidateNewPass] = useState('')
+
 
     const registry = async () => {
         const rr = await fetch(`${LOCALHOST}/registry`, {
@@ -19,7 +23,7 @@ export default function Registry({ navigation }) {
         const res = await rr.json()
 
         if (res.success) {
-            navigation.navigate("Login");
+            navigation.navigate("Avatar");
             /*      } else if (res.error) {
                       Alert.alert("El email debe terminar en @gmail.com o @hotmail.com");
                       setNewUser("");
@@ -31,50 +35,49 @@ export default function Registry({ navigation }) {
             setNewUser("");
             setNewEmail("");
             setNewPass("");
+            setValidateNewPass("");
         }
     };
     return (
-        <View style={styles.container}>
-            <Text style={styles.title}>
-                Crear cuenta</Text>
-            <View style={styles.headerContainer}>
+        <View style={styles.mainContainer}>
+            <View style={styles.backgroundImageContainer}>
                 <Image
-                    source={{ uri: 'https://wallpaperaccess.com/full/3600151.jpg' }}
+                    source={{ uri: 'https://res.cloudinary.com/dpwaxzhnx/image/upload/v1684262661/Pokedex_db/blaziken_hn3jku.jpg' }}
                     style={styles.image}
                 />
             </View>
-            <Text
-                style={styles.textPrimary}
-            >Usuario</Text>
-            <TextInput
-                style={styles.textInputStyle}
-                onChangeText={setNewUser}
-                value={user}
-                placeholder='Debe contener entre 4 o más caracteres'
-            />
-            <Text
-                style={styles.textPrimary}>
-                Email</Text>
-            <TextInput
-                style={styles.textInputStyle}
-                onChangeText={setNewEmail}
-                value={email}
-                placeholder='user@example.com'
-            />
-            <Text
-                style={styles.textPrimary}>
-                Contraseña</Text>
-            <TextInput
-                style={styles.textInputStyle}
-                onChangeText={setNewPass}
-                value={pass}
-                secureTextEntry
-                placeholder='Debe contener entre 7 o más caracteres'
-            />
-            <Button
-                style={styles.buttonStyle}
-                title='Enviar Registro'
-                onPress={registry} />
+            <View style={styles.container}>
+                <Text style={styles.title}>
+                    Crear cuenta</Text>
+                <TextInput
+                    style={styles.textInputStyle}
+                    onChangeText={setNewUser}
+                    value={user}
+                    iconName="account-outline"
+                    placeholder='Nombre de usuario / Caracteres mínimos: 4 o más'
+                />
+                <TextInput
+                    style={styles.textInputStyle}
+                    onChangeText={setNewEmail}
+                    value={email}
+                    placeholder='Email / example@gmail.com'
+                />
+                <TextInput
+                    style={styles.textInputStyle}
+                    onChangeText={setNewPass}
+                    value={pass}
+                    secureTextEntry
+                    placeholder='Contraseña / Caracteres mínimos: 7 o más'
+                />
+                <TextInput
+                    style={styles.textInputStyle}
+                    onChangeText={setValidateNewPass}
+                    value={validatePass}
+                    secureTextEntry
+                    placeholder='Confirma tu contraseña'
+                />
+                <ButtonGradientRegistry onPress={registry} style={styles.buttonRegistryStyle} />
+            </View>
         </View>
     );
 }

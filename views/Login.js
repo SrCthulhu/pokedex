@@ -1,29 +1,35 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, Button, Alert, Image } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TextInput, Alert, Image, TouchableOpacity } from 'react-native';
 import { LOCALHOST } from '../constants';
 import { loginStyles as styles } from '../styles';
+import ButtonGradient from '../components/ButtonGradient';
 
 export default function Login({ navigation }) {
     const [user, setUser] = useState('')
     const [pass, setPass] = useState('')
 
-
     const login = async () => {
-        const rr = await fetch(`${LOCALHOST}/login`, {
-            method: 'POST',
-            body: JSON.stringify({ user, pass }),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        const res = await rr.json()
+        try {
+            const rr = await fetch(`${LOCALHOST}/login`, {
+                method: 'POST',
+                body: JSON.stringify({ user, pass }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            const res = await rr.json()
 
-        if (res.success) {
-            navigation.navigate("Home");
-        } else {
-            Alert.alert("Datos incorrectos, verifique e intente nuevamente.");
-            setUser("");
-            setPass("");
+            if (res.success) {
+                navigation.navigate("Avatar");
+            } else {
+                Alert.alert("Datos inválidos, verifique los campos e intente nuevamente.");
+                user("");
+                pass("");
+                setUser("");
+                setPass("");
+            }
+        } catch (e) {
+            console.log("E:", e)
         }
     };
 
@@ -31,54 +37,52 @@ export default function Login({ navigation }) {
         navigation.navigate("Registry");
     };
     return (
-        <View style={styles.container}>
-            <Text
-                style={styles.title}>
-                ¡Bienvenido!</Text>
-            <View style={styles.imageContainer}>
+        <View style={styles.mainContainer}>
+            <View style={styles.gradientContainer}>
                 <Image
-                    style={styles.image}
-                    source={{ uri: 'https://icon-library.com/images/pokedex-icon/pokedex-icon-21.jpg' }}
+                    style={styles.gradientImage}
+                    source={{ uri: 'https://res.cloudinary.com/dpwaxzhnx/image/upload/v1683907685/Pokedex_db/Degradado_ullhnp.png' }}
                 />
             </View>
-            <Text
-                style={styles.textPrimary}
-            >Usuario/Email</Text>
-            <TextInput
-                style={styles.textInputStyle}
-                onChangeText={setUser}
-                value={user}
-                placeholder='user@example.com'
-            />
-            <Text
-                style={styles.textPrimary}
-            >Contraseña</Text>
-            <TextInput
-                style={styles.textInputStyle}
-                onChangeText={setPass}
-                value={pass}
-                secureTextEntry
-                placeholder='*******'
-            />
-            <Button
-                style={styles.buttonStyle}
-                title='Login'
-                onPress={login} />
-            <Text
-                style={styles.textSecondary}
-            >¿Olvidaste tu contraseña?</Text>
-            <Button
-                style={styles.buttonStyle2}
-                title='Recuperar clave'
-            />
-            <Text
-                style={styles.textSecondary}
-            >No tengo cuenta</Text>
-            <Button
-                style={styles.buttonStyle3}
-                title='Registrarse'
-                onPress={handleSignInPress}
-            />
+            <View style={styles.container}>
+                <View style={styles.imageContainer}>
+                    <Image
+                        style={styles.image}
+                        source={{ uri: 'https://icon-library.com/images/pokedex-icon/pokedex-icon-21.jpg' }}
+                    />
+                </View>
+                <Text
+                    style={styles.title}>
+                    Hola</Text>
+                <Text
+                    style={styles.subTitle}>
+                    Inicia sesión en tu cuenta
+                </Text>
+                <TextInput
+                    style={styles.textInputStyle}
+                    onChangeText={setUser}
+                    value={user}
+                    placeholder='username / user@gmail.com'
+                />
+                <TextInput
+                    style={styles.textInputStyle}
+                    onChangeText={setPass}
+                    value={pass}
+                    secureTextEntry
+                    placeholder='*******'
+                />
+                <Text
+                    style={styles.textSecondary}
+                >¿Olvidaste tu contraseña?</Text>
+                <ButtonGradient onPress={login} />
+                <View style={styles.registryContainer}>
+                    <TouchableOpacity
+                        onPress={handleSignInPress}
+                    >
+                        <Text style={styles.textRegistry}>No tengo cuenta, crear</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
         </View>
     );
 }
