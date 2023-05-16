@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { FavoritesContext } from '../context';
+import { CollectedContext } from '../context';
 import { cardStyles as styles } from '../styles';
 import { colors } from '../constants';
 import { useGetDetails } from '../services';
@@ -9,8 +9,8 @@ import { useGetDetails } from '../services';
 // TouchableOpacity es como un Botón sin estilo, hace la función de un View pero clickable.
 // El símbolo ? con el nombre es para validar que exista y no envíe al front un campo vacío con un error (evitamos crasheo).
 export default function Card({ pokemon }) {
-    const { favorites, addFavorite, saveFavorites } = useContext(FavoritesContext);
-    const [isFavorite, setIsFavorite] = useState(false);
+    const { collected, addCollected } = useContext(CollectedContext);
+    const [isCollected, setIsCollected] = useState(false);
 
     /* 
     Hacemos un llamado al servidor con useQuery. 
@@ -22,15 +22,15 @@ export default function Card({ pokemon }) {
 
     useEffect(() => {
         async function getStatus() {
-            const find = favorites.filter(element => element.name === pokemon.name);
+            const find = collected.filter(element => element.name === pokemon.name);
             if (find.length > 0) {
-                setIsFavorite(true);
+                setIsCollected(true);
             } else {
-                setIsFavorite(false);
+                setIsCollected(false);
             }
         }
         getStatus();
-    }, [favorites, pokemon.name]);
+    }, [collected, pokemon.name]);
 
 
     if (error) {
@@ -49,12 +49,12 @@ export default function Card({ pokemon }) {
                 styles.container,
                 { backgroundColor: colors[data?.types[0]?.type?.name] },
             ]}>
-            <TouchableOpacity onPress={() => addFavorite(pokemon)}>
+            <TouchableOpacity onPress={() => addCollected(pokemon)}>
                 {
-                    isFavorite && <Icon name="heart" size={40} color="#E04C50" /> // If corazon rojo (item agregado a la lista)
+                    isCollected && <Icon name="heart" size={40} color="#E04C50" /> // If corazon rojo (item agregado a la lista)
                 }
                 {
-                    !isFavorite && <Icon name="heart-outline" size={40} color="#FFF" /> //If not corazon blanco (item sin agregar)
+                    !isCollected && <Icon name="heart-outline" size={40} color="#FFF" /> //If not corazon blanco (item sin agregar)
                 }
             </TouchableOpacity>
             <Image

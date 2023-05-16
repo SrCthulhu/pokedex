@@ -52,7 +52,7 @@ export default function Home() {
         <View style={styles.container}>
 
             <Header
-                title='Pokédex 👾'
+                title='Bienvenido a la Pokédex'
                 description='Busca un pokémon usando su nombre o número.'
                 tmp={tmp}
                 setTmp={setTmp}

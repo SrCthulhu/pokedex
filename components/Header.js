@@ -10,13 +10,14 @@ export default function Header({ showSearch, tmp, setTmp, setSearch, title, desc
             {
                 showSearch && (<TextInput
                     style={styles.search}
-                    placeholder="Comenzar la búsqueda, ingresa"
+                    placeholder="Ejemplo: Pikachú"
                     value={tmp}
                     //Ver lo que el usuario escriba
                     onChangeText={(text) => setTmp(text)}
                     /* Evitamos que se busque cada letra haciendo peticiones al servidor 
                     y será solo cuando termine de escribir y le de click a ok. */
                     onEndEditing={() => setSearch(tmp)}
+                    underlineColorAndroid="transparent"
                 />)
             }
 
