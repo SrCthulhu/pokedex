@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, Button, Alert, Image } from 'react-native';
+import { View, Text, TextInput, Alert, Image } from 'react-native';
 import { LOCALHOST } from '../constants';
 import { registryStyles as styles } from '../styles';
 import ButtonGradientRegistry from "../components/ButtonGradientRegistry";
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export default function Registry({ navigation }) {
     const [user, setNewUser] = useState('')
@@ -15,7 +14,7 @@ export default function Registry({ navigation }) {
     const registry = async () => {
         const rr = await fetch(`${LOCALHOST}/registry`, {
             method: 'POST',
-            body: JSON.stringify({ user, email, pass }),
+            body: JSON.stringify({ user: user.toLowerCase(), email: email.toLowerCase(), pass, validatePass }),
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -24,14 +23,20 @@ export default function Registry({ navigation }) {
 
         if (res.success) {
             navigation.navigate("Avatar");
-            /*      } else if (res.error) {
-                      Alert.alert("El email debe terminar en @gmail.com o @hotmail.com");
-                      setNewUser("");
-                      setNewEmail("");
-                      setNewPass("");
-            */
+        } else if (res.error1) {
+            Alert.alert("Dirección de email inválida, introduzca algo como: @example.com");
+            setNewUser("");
+            setNewEmail("");
+            setNewPass("");
+            setValidateNewPass("");
+        } else if (res.error2) {
+            Alert.alert("Las contraseñas no coinciden, introduzca los datos de vuelta.");
+            setNewUser("");
+            setNewEmail("");
+            setNewPass("");
+            setValidateNewPass("");
         } else {
-            Alert.alert("Usuario / contraseña demasiado corta, intente nuevamente.");
+            Alert.alert("Usuario / Contraseña demasiado corta, intente nuevamente.");
             setNewUser("");
             setNewEmail("");
             setNewPass("");
@@ -53,7 +58,6 @@ export default function Registry({ navigation }) {
                     style={styles.textInputStyle}
                     onChangeText={setNewUser}
                     value={user}
-                    iconName="account-outline"
                     placeholder='Nombre de usuario / Caracteres mínimos: 4 o más'
                 />
                 <TextInput
@@ -76,6 +80,24 @@ export default function Registry({ navigation }) {
                     secureTextEntry
                     placeholder='Confirma tu contraseña'
                 />
+                {/* <InputComponent 
+                iconName="account-outline"
+                placeholder='Nombre de usuario / Caracteres mínimos: 4 o más'
+                /> */}
+
+                {/* <InputComponent 
+                iconName="email-outline"
+                placeholder='Email / example@gmail.com'
+                /> */}
+
+                {/* <InputComponent 
+                iconName="lock-outline"
+                placeholder='Contraseña / Caracteres mínimos: 7 o más'
+                /> */}
+
+                {/* <InputComponent 
+                placeholder='Confirma tu contraseña'
+                /> */}
                 <ButtonGradientRegistry onPress={registry} style={styles.buttonRegistryStyle} />
             </View>
         </View>

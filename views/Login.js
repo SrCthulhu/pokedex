@@ -12,24 +12,27 @@ export default function Login({ navigation }) {
         try {
             const rr = await fetch(`${LOCALHOST}/login`, {
                 method: 'POST',
-                body: JSON.stringify({ user, pass }),
+                body: JSON.stringify({ user: user.toLowerCase(), pass }),
                 headers: {
                     'Content-Type': 'application/json'
                 }
-            })
-            const res = await rr.json()
+            });
+            const text = await rr.text();
+            console.log('Response Status:', rr.status);
+            console.log('Response Text:', text);
+
+            const res = JSON.parse(text);
+            console.log('Response:', res);
 
             if (res.success) {
                 navigation.navigate("Avatar");
             } else {
                 Alert.alert("Datos inválidos, verifique los campos e intente nuevamente.");
-                user("");
-                pass("");
                 setUser("");
                 setPass("");
             }
         } catch (e) {
-            console.log("E:", e)
+            console.log("Error:", e);
         }
     };
 
