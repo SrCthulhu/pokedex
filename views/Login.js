@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { View, Text, TextInput, Alert, Image, TouchableOpacity } from 'react-native';
 import { LOCALHOST } from '../constants';
 import { loginStyles as styles } from '../styles';
 import ButtonGradient from '../components/ButtonGradient';
+import { AuthenticationContext } from '../context/authentication';
 
 export default function Login({ navigation }) {
     const [user, setUser] = useState('')
     const [pass, setPass] = useState('')
+    const { setToken } = useContext(AuthenticationContext);
 
     const login = async () => {
         try {
@@ -18,14 +20,12 @@ export default function Login({ navigation }) {
                 }
             });
             const text = await rr.text();
-            console.log('Response Status:', rr.status);
-            console.log('Response Text:', text);
-
             const res = JSON.parse(text);
             console.log('Response:', res);
 
             if (res.success) {
-                navigation.navigate("Avatar");
+                setToken(res.token);
+                navigation.navigate("AvatarsTab");
             } else {
                 Alert.alert("Datos inválidos, verifique los campos e intente nuevamente.");
                 setUser("");

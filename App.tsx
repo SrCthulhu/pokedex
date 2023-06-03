@@ -9,8 +9,10 @@ import PokemonSelection from './views/PokemonSelection';
 import About from './views/About';
 import Login from './views/Login';
 import Registry from './views/Registry';
-import Avatar from './views/AvatarSelection';
+import Avatars from './views/AvatarSelection';
+import Tower from './views/Tower';
 import ContextProvider from './context';
+import AuthenticationProvider from './context/authentication';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
 const options = ({ route }: { route: any }) => ({
@@ -22,6 +24,12 @@ const options = ({ route }: { route: any }) => ({
       icon = 'pokeball';
     } else if (route.name === 'Acerca') {
       icon = 'information';
+    } else if (route.name === 'Avatars') {
+      icon = 'account-cowboy-hat';
+    } else if (route.name === 'Selección') {
+      icon = 'arrow-down';
+    } else if (route.name === 'Niveles') {
+      icon = 'graph';
     }
     return <Icon name={icon} size={30} color={color} />;
   },
@@ -37,7 +45,10 @@ function NavigationWithTabs() {
     <Tab.Navigator initialRouteName="Login"
       screenOptions={options}
     >
+      <Tab.Screen name="Avatars" component={Avatars} />
       <Tab.Screen name="Pokedex" component={Home} />
+      <Tab.Screen name="Selección" component={PokemonSelection} />
+      <Tab.Screen name="Niveles" component={Tower} />
       <Tab.Screen name="Colección" component={Collection} />
       <Tab.Screen name="Acerca" component={About} />
     </Tab.Navigator>
@@ -52,15 +63,16 @@ function App(): JSX.Element {
   return (
     <QueryClientProvider client={queryClient}>
       <ContextProvider>
-        <NavigationContainer>
-          <Stack.Navigator screenOptions={{ headerShown: false }}>
-            <Stack.Screen name="Login" component={Login} />
-            <Stack.Screen name="Registry" component={Registry} />
-            <Stack.Screen name="Avatar" component={Avatar} />
-            <Stack.Screen name="Selección" component={PokemonSelection} />
-            <Stack.Screen name="PokedexTab" component={NavigationWithTabs} />
-          </Stack.Navigator>
-        </NavigationContainer>
+        <AuthenticationProvider>
+          <NavigationContainer>
+            <Stack.Navigator screenOptions={{ headerShown: false }}>
+              <Stack.Screen name="Login" component={Login} />
+              <Stack.Screen name="Registry" component={Registry} />
+              <Stack.Screen name="AvatarsTab" component={NavigationWithTabs} />
+              <Stack.Screen name="PokedexTab" component={NavigationWithTabs} />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </AuthenticationProvider>
       </ContextProvider>
     </QueryClientProvider>
   );

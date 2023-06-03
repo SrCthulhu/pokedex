@@ -1,28 +1,28 @@
 import React, { createContext, useState, useEffect } from "react";
 import { LOCALHOST } from '../constants';
 
-export const FavoritesContext = createContext();
+export const CollectedContext = createContext();
 
 export default function Provider({ children }) {
-    const [favorites, setFavorites] = useState([]);
+    const [collected, setCollected] = useState([]);
     const [flag, setFlag] = useState(true);
 
     useEffect(() => {
-        async function retrieveFavorites() {
-            console.log("findFavorites")
-            const favoritesRetrieved = await findFavorites();
-            setFavorites(favoritesRetrieved);
+        async function retrieveCollected() {
+            console.log("findCollected")
+            const collectedRetrieved = await findCollected();
+            setCollected(collectedRetrieved);
         }
 
         console.log("useEffect")
         if (flag) {
             setFlag(false);
-            retrieveFavorites();
+            retrieveCollected();
         }
 
     }, [flag]);
 
-    async function updateFavorites() {
+    async function updateCollected() {
         /*
         const list = item.getItem('_favorites');
         if (list) {
@@ -32,31 +32,31 @@ export default function Provider({ children }) {
         */
     }
 
-    const addFavorite = async poke => {
+    const addCollected = async poke => {
         try {
-            const newList = [...favorites]; // El operador (...variable) indica que quieres clonar para no sobreescribir el elemento
+            const newList = [...collected]; // El operador (...variable) indica que quieres clonar para no sobreescribir el elemento
             const found = newList.filter(element => element.name === poke.name);
             if (found.length === 0) {
                 newList.push(poke);
-                saveFavorites(poke);
+                saveCollected(poke);
                 //save en el API
                 //await item.setItem('_favorites', JSON.stringify(newList));
-                setFavorites(newList);
+                setCollected(newList);
             } else {
                 const newListPokes = newList.filter(element => element.name !== poke.name);
                 newList.push(poke);
-                deleteFavorites(poke);
+                deleteCollected(poke);
                 //save en el API
                 //await item.setItem('_favorites', JSON.stringify(newListPokes));
-                setFavorites(newListPokes);
+                setCollected(newListPokes);
             }
         } catch (error) {
             console.log({ error });
         }
     };
 
-    const saveFavorites = async (poke) => {
-        const rr = await fetch(`${LOCALHOST}/favorites`, {
+    const saveCollected = async (poke) => {
+        const rr = await fetch(`${LOCALHOST}/collected`, {
             method: 'POST',
             body: JSON.stringify(poke),
             headers: {
@@ -66,18 +66,30 @@ export default function Provider({ children }) {
         const res = await rr.json()
         console.log(res)
     };
-    const findFavorites = async () => {
-        const rr = await fetch(`${LOCALHOST}/favorites`)
+    const findCollected = async () => {
+        const rr = await fetch(`${LOCALHOST}/collected`)
         const res = await rr.json()
 
-        return res.favorites;
+        return res.collected;
+    };
+
+    const deleteCollected = async (poke) => {
+        const rr = await fetch(`${LOCALHOST}/collected`, {
+            method: 'DELETE',
+            body: JSON.stringify(poke),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        const res = await rr.json()
+        console.log(res)
     };
 
 
     return (
-        <FavoritesContext.Provider value={{ favorites, setFavorites, updateFavorites, addFavorite, saveFavorites }}>
+        <CollectedContext.Provider value={{ collected, setCollected, updateCollected, addCollected, saveCollected, deleteCollected }}>
             {children}
-        </FavoritesContext.Provider>
+        </CollectedContext.Provider>
     );
 };
 
