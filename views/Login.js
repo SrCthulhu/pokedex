@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { View, Text, TextInput, Alert, Image, TouchableOpacity } from 'react-native';
 import { LOCALHOST } from '../constants';
 import { loginStyles as styles } from '../styles';
@@ -6,11 +6,19 @@ import ButtonGradient from '../components/ButtonGradient';
 import { AuthenticationContext } from '../context/authentication';
 
 export default function Login({ navigation }) {
-    const [user, setUser] = useState('')
-    const [pass, setPass] = useState('')
+    const [user, setUser] = useState('');
+    const [pass, setPass] = useState('');
     const { setToken } = useContext(AuthenticationContext);
 
-    const login = async () => {
+    useEffect(() => {
+        checkUserAvatar();
+    }, []);
+
+    const checkUserAvatar = async () => {
+        // Prevenimos que se dispare el alert al iniciar la app porque user es vacío y password.
+        if (!user || !pass) {
+            return;
+        }
         try {
             const rr = await fetch(`${LOCALHOST}/login`, {
                 method: 'POST',
@@ -21,11 +29,28 @@ export default function Login({ navigation }) {
             });
             const text = await rr.text();
             const res = JSON.parse(text);
-            console.log('Response:', res);
 
             if (res.success) {
                 setToken(res.token);
-                navigation.navigate("AvatarsTab");
+                //Buscamos si el usuario posee avatar para navegar a la vista de avatars o a la siguiente directamente.
+                const avatarResponse = await fetch(`${LOCALHOST}/avatars`, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Token': res.token,
+                    },
+                });
+
+                const avatarData = await avatarResponse.json();
+                const userDocument = avatarData.userDocument; // Extraigo el usuario de la respuesta del backend
+
+                if (!avatarData.avatars || avatarData.avatars.length === 0 || !userDocument.avatar) {
+                    console.log('Navigating to Avatars');
+                    navigation.navigate('Avatars');
+                } else {
+                    console.log('Navigating to NivelesTab');
+                    navigation.navigate('NivelesTab');
+                }
+
             } else {
                 Alert.alert("Datos inválidos, verifique los campos e intente nuevamente.");
                 setUser("");
@@ -65,7 +90,7 @@ export default function Login({ navigation }) {
                     style={styles.textInputStyle}
                     onChangeText={setUser}
                     value={user}
-                    placeholder='username / user@gmail.com'
+                    placeholder='Username / User@gmail.com'
                 />
                 <TextInput
                     style={styles.textInputStyle}
@@ -77,7 +102,7 @@ export default function Login({ navigation }) {
                 <Text
                     style={styles.textSecondary}
                 >¿Olvidaste tu contraseña?</Text>
-                <ButtonGradient onPress={login} />
+                <ButtonGradient onPress={checkUserAvatar} />
                 <View style={styles.registryContainer}>
                     <TouchableOpacity
                         onPress={handleSignInPress}

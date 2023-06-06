@@ -42,8 +42,7 @@ export default function Avatars({ navigation }) {
 
         const data = await response.json();
         if (data.success) {
-            console.log("Navigating to PokedexTab");
-            navigation.navigate("PokedexTab");
+            navigation.navigate("Selección");
         }
     };
 

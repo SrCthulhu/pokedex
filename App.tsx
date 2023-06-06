@@ -24,10 +24,6 @@ const options = ({ route }: { route: any }) => ({
       icon = 'pokeball';
     } else if (route.name === 'Acerca') {
       icon = 'information';
-    } else if (route.name === 'Avatars') {
-      icon = 'account-cowboy-hat';
-    } else if (route.name === 'Selección') {
-      icon = 'arrow-down';
     } else if (route.name === 'Niveles') {
       icon = 'graph';
     }
@@ -42,13 +38,11 @@ function NavigationWithTabs() {
   const Tab = createBottomTabNavigator();
 
   return (
-    <Tab.Navigator initialRouteName="Login"
+    <Tab.Navigator initialRouteName="Niveles"
       screenOptions={options}
     >
-      <Tab.Screen name="Avatars" component={Avatars} />
-      <Tab.Screen name="Pokedex" component={Home} />
-      <Tab.Screen name="Selección" component={PokemonSelection} />
       <Tab.Screen name="Niveles" component={Tower} />
+      <Tab.Screen name="Pokedex" component={Home} />
       <Tab.Screen name="Colección" component={Collection} />
       <Tab.Screen name="Acerca" component={About} />
     </Tab.Navigator>
@@ -68,8 +62,9 @@ function App(): JSX.Element {
             <Stack.Navigator screenOptions={{ headerShown: false }}>
               <Stack.Screen name="Login" component={Login} />
               <Stack.Screen name="Registry" component={Registry} />
-              <Stack.Screen name="AvatarsTab" component={NavigationWithTabs} />
-              <Stack.Screen name="PokedexTab" component={NavigationWithTabs} />
+              <Stack.Screen name="Avatars" component={Avatars} />
+              <Stack.Screen name="Selección" component={PokemonSelection} />
+              <Stack.Screen name="NivelesTab" component={NavigationWithTabs} />
             </Stack.Navigator>
           </NavigationContainer>
         </AuthenticationProvider>
