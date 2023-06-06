@@ -42,7 +42,7 @@ export default function Avatars({ navigation }) {
 
         const data = await response.json();
         if (data.success) {
-            navigation.navigate("Selección");
+            navigation.navigate("PokemonSelection");
         }
     };
 

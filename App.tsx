@@ -63,7 +63,7 @@ function App(): JSX.Element {
               <Stack.Screen name="Login" component={Login} />
               <Stack.Screen name="Registry" component={Registry} />
               <Stack.Screen name="Avatars" component={Avatars} />
-              <Stack.Screen name="Selección" component={PokemonSelection} />
+              <Stack.Screen name="PokemonSelection" component={PokemonSelection} />
               <Stack.Screen name="NivelesTab" component={NavigationWithTabs} />
             </Stack.Navigator>
           </NavigationContainer>
