@@ -39,15 +39,11 @@ export default function Provider({ children }) {
             if (found.length === 0) {
                 newList.push(poke);
                 saveCollected(poke);
-                //save en el API
-                //await item.setItem('_favorites', JSON.stringify(newList));
                 setCollected(newList);
             } else {
                 const newListPokes = newList.filter(element => element.name !== poke.name);
                 newList.push(poke);
                 deleteCollected(poke);
-                //save en el API
-                //await item.setItem('_favorites', JSON.stringify(newListPokes));
                 setCollected(newListPokes);
             }
         } catch (error) {
@@ -56,15 +52,22 @@ export default function Provider({ children }) {
     };
 
     const saveCollected = async (poke) => {
-        const rr = await fetch(`${LOCALHOST}/collected`, {
-            method: 'POST',
-            body: JSON.stringify(poke),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        const res = await rr.json()
-        console.log(res)
+        try {
+            const { _id, ...pokemon } = poke;
+            console.log({ pokemon });
+
+            const rr = await fetch(`${LOCALHOST}/collected`, {
+                method: 'POST',
+                body: JSON.stringify(pokemon),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            const res = await rr.json();
+            console.log(res);
+        } catch (e) {
+            console.log("http error", { e });
+        }
     };
     const findCollected = async () => {
         const rr = await fetch(`${LOCALHOST}/collected`)
