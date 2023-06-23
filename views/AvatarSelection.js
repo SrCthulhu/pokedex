@@ -13,7 +13,7 @@ export default function Avatars({ navigation }) {
             const response = await fetch(`${LOCALHOST}/avatars`, {
                 headers: {
                     'Content-Type': 'application/json',
-                    'Token': token,
+                    'token': token,
                 },
             });
             const data = await response.json();
