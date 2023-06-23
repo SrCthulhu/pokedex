@@ -32,18 +32,18 @@ export default function Provider({ children }) {
         */
     }
 
-    const addCollected = async poke => {
+    const addCollected = async (poke, token) => {
         try {
             const newList = [...collected]; // El operador (...variable) indica que quieres clonar para no sobreescribir el elemento
             const found = newList.filter(element => element.name === poke.name);
             if (found.length === 0) {
                 newList.push(poke);
-                saveCollected(poke);
+                await saveCollected(poke, token); //Pasamos el token para agregar
                 setCollected(newList);
             } else {
                 const newListPokes = newList.filter(element => element.name !== poke.name);
                 newList.push(poke);
-                deleteCollected(poke);
+                await deleteCollected(poke); //Pasamos el token para eliminar
                 setCollected(newListPokes);
             }
         } catch (error) {
@@ -51,7 +51,7 @@ export default function Provider({ children }) {
         }
     };
 
-    const saveCollected = async (poke) => {
+    const saveCollected = async (poke, token, performNavigation) => {
         try {
             const { _id, ...pokemon } = poke;
             console.log({ pokemon });
@@ -60,11 +60,16 @@ export default function Provider({ children }) {
                 method: 'POST',
                 body: JSON.stringify(pokemon),
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'token': token
                 }
             })
             const res = await rr.json();
             console.log(res);
+            if (performNavigation && res.success === true) {
+                console.log("Button pressed");
+                navigation.navigate("Niveles");
+            }
         } catch (e) {
             console.log("http error", { e });
         }
