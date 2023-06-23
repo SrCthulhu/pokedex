@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { CollectedContext } from '../context';
+import { CollectedContext } from '../context/collected';
 import { cardStyles as styles } from '../styles';
 import { colors } from '../constants';
 import { useGetDetails } from '../services';

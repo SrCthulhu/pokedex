@@ -151,11 +151,45 @@ export const registryStyles = StyleSheet.create({
         backgroundColor: '#fff',
         elevation: 15,
         justifyContent: 'center',
+        flexDirection: 'row',
+        marginVertical: 5
 
     },
     buttonRegistryStyle: {
         marginLeft: -100
     }
+});
+export const InputComponentStyles = StyleSheet.create({
+    textInputStyle: {
+        paddingStart: 15,
+        height: 50,
+        marginTop: 15,
+        borderRadius: 30,
+        backgroundColor: '#fff',
+        elevation: 15,
+        justifyContent: 'center',
+        flexDirection: 'row',
+        marginVertical: 5
+    },
+    iconStyle: {
+        fontSize: 22,
+        color: '#E00004',
+        marginRight: 10
+    },
+    errorInputStyle: {
+        color: '#1f62ff',
+    },
+    focusedInputStyle: {
+        color: '#000'
+    },
+    unfocusedInputStyle: {
+        color: 'gray'
+    },
+    errorMessage: {
+        color: '#1f62ff',
+        fontSize: 12,
+        marginTop: 7
+    },
 });
 export const avatarScreenStyles = StyleSheet.create({
     container: {
@@ -183,13 +217,12 @@ export const avatarScreenStyles = StyleSheet.create({
         marginRight: 10,
         flexDirection: 'row',
         marginBottom: 10
-
     },
     titleHeader: {
         color: "#FFF",
-        fontSize: 20,
+        fontSize: 22,
         fontWeight: 'bold',
-        paddingLeft: 18,
+        alignSelf: 'center',
     },
     imageContainer: {
         marginTop: 10,
@@ -235,41 +268,124 @@ export const avatarScreenStyles = StyleSheet.create({
     },
 });
 export const pokemonSelectionStyles = StyleSheet.create({
-    container: {
+    mainContainer: {
         flex: 1,
     },
-    dialogSquare: {
+    backgroundImageContainer: {
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+    },
+    image: {
+        width: 415,
+        height: 660,
+        alignSelf: 'center',
+        position: 'absolute'
+    },
+    container: {
+        flexDirection: 'row',
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginLeft: 30,
+        marginRight: 30,
+    },
+    pokeballImage: {
+        width: 90,
+        height: 90,
+        marginRight: 5,
+        marginLeft: 5,
+        alignItems: 'center',
+    },
+    header: {
         paddingTop: 12,
         backgroundColor: "#E00004",
         paddingBottom: 12,
     },
-    titleSquare: {
-        color: "#FFF",
-        fontSize: 20,
-        fontWeight: 'bold',
-        paddingLeft: 18,
-    },
-    backgroundImage: {
-        width: '100%',
-        height: height * 0.90,
+    titleStyle: {
+        fontSize: 22,
+        fontWeight: "bold",
+        color: '#FFF',
         alignSelf: 'center',
+    },
+    modalContainer: {
+        flex: 1,
+        alignItems: 'center',
         justifyContent: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
     },
-    imageContainer: {
-        marginTop: 10,
-        marginLeft: 10,
-        marginRight: 10,
-        flexDirection: 'row',
-        marginBottom: 10
-    },
-    image: {
-        width: 95,
-        height: 95,
-        resizeMode: 'contain',
+    modalBackImageContainer: {
         position: 'absolute',
-        justifyContent: 'center'
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+    },
+    modalBackImage: {
+        width: '100%',
+        height: '100%',
+        alignSelf: 'center',
+    },
+    closeButton: {
+        position: 'absolute',
+        top: 110,
+        left: 280,
     },
 });
+export const cardStyles = StyleSheet.create({
+    container: {
+        width: 160,
+        height: height * 0.40,
+        justifyContent: "space-between",
+        alignItems: "center",
+        borderRadius: 30,
+        paddingTop: 10,
+        paddingBottom: 10,
+    },
+    image: {
+        width: 150,
+        height: 150,
+        marginBottom: 5,
+    },
+    name: {
+        color: "#FFF",
+        fontSize: 20,
+        fontWeight: "bold",
+        marginBottom: 5,
+    },
+    type: {
+        color: "#FFF",
+        fontSize: 16,
+        fontWeight: "bold",
+        marginTop: 5,
+    },
+    level: {
+        color: "#FFF",
+        fontSize: 16,
+        fontWeight: "bold",
+        marginBottom: 5
+    },
+    outlineBorderContainer: {
+        borderWidth: 0,
+        borderRadius: 30,
+        //    borderColor: 'transparent',
+    },
+    selectedContainer: {
+        borderColor: '#E00004',
+        borderWidth: 4,
+    },
+    separatorContainer: {
+        width: '100%',
+        alignItems: 'center',
+    },
+    separator: {
+        width: '90%',
+        height: 1,
+        backgroundColor: '#E0E6ED',
+    },
+});
+
 export const homeStyles = StyleSheet.create({
     container: {
         marginLeft: '5%',
@@ -279,6 +395,94 @@ export const homeStyles = StyleSheet.create({
         color: '#000',
         alignItems: "center",
     }
+});
+export const towerStyles = StyleSheet.create({
+    mainContainer: {
+        flex: 1,
+    },
+    backgroundImageContainer: {
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+    },
+    backgroundImage: {
+        width: 415,
+        height: 615,
+        alignSelf: 'center',
+        position: 'absolute'
+    },
+    container: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingHorizontal: 7,
+    },
+    header: {
+        paddingTop: 12,
+        backgroundColor: "#E00004",
+        paddingBottom: 12,
+    },
+    titleStyle: {
+        fontSize: 26,
+        fontWeight: "bold",
+        color: '#fff',
+        alignSelf: 'center',
+    },
+    subHeader: {
+        paddingTop: 12,
+        backgroundColor: "#1E2D3E",
+        paddingBottom: 12,
+    },
+    subHeaderDescription: {
+        fontSize: 16,
+        color: '#FFF',
+        alignSelf: 'center',
+    },
+    subtitleContainer: {
+        marginTop: 170,
+        alignSelf: 'center',
+        position: 'absolute'
+    },
+    subtitle: {
+        fontSize: 26,
+        fontWeight: "bold",
+        color: '#fff',
+        alignSelf: 'center',
+    },
+    pokemonContainer: {
+        paddingTop: 30,
+        alignItems: 'center',
+    },
+    pokemonImage: {
+        width: 160,
+        height: 160,
+        resizeMode: 'contain',
+    },
+    pokemonName: {
+        color: "#E00004",
+        fontWeight: "bold",
+        alignSelf: 'center',
+        fontSize: 20,
+    },
+    Innercontainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    userPokemonContainer: {
+        alignItems: 'center',
+    },
+    vsImage: {
+        width: 80,
+        height: 80,
+        resizeMode: 'contain',
+    },
+    flatlistContainer: {
+        marginTop: 133,
+    },
+    lastPokemonContainer: {
+        marginBottom: 100, // estilo para Condición del flatlist.
+    },
 });
 export const headerStyles = StyleSheet.create({
     container: {
@@ -304,45 +508,6 @@ export const headerStyles = StyleSheet.create({
     },
 
 });
-export const cardStyles = StyleSheet.create({
-    container: {
-        width: '45%',
-        height: height * 0.40,
-        backgroundColor: "#000",
-        justifyContent: "center",
-        alignItems: "center",
-        borderRadius: 30,
-        marginRight: '5%',
-        marginBottom: 20,
-    },
-    image: {
-        width: 150,
-        height: 150,
-        marginBottom: 5,
-    },
-    name: {
-        color: "#FFF",
-        fontSize: 16,
-        fontWeight: "bold", //Negrita
-        marginBottom: 5,
-    },
-    abilities: {
-        color: "#3D3D3D",
-        fontSize: 13,
-        fontWeight: "bold",
-    },
-    xp: {
-        color: "#75AAF9",
-        fontSize: 13,
-        fontWeight: "bold",
-    },
-    number: {
-        color: "#3D3D3D",
-        fontSize: 13,
-        fontWeight: "bold",
-    },
-});
-
 
 export const collectedStyles = StyleSheet.create({
     container: {
