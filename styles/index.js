@@ -5,7 +5,7 @@ pantalla y hacerlo responsivo en cualquier dispositivo
 adaptamos en porcentaje el tamaño de la pantalla del usuario
 para que en todos los moviles se vea igual.
 */
-const { height } = Dimensions.get('screen');
+const { height, width } = Dimensions.get('screen');
 
 export const loginStyles = StyleSheet.create({
     mainContainer: {
@@ -396,6 +396,30 @@ export const homeStyles = StyleSheet.create({
         alignItems: "center",
     }
 });
+export const headerStyles = StyleSheet.create({
+    container: {
+        marginRight: '5%',
+        marginBottom: 20,
+    },
+    title: {
+        fontSize: 28,
+        color: '#000',
+        fontWeight: 'bold',
+    },
+    description: {
+        fontSize: 16,
+        color: '#000',
+        marginTop: 10,
+    },
+    search: {
+        borderWidth: 1.5,
+        borderColor: '#1E2D3E',
+        borderRadius: 15,
+        marginTop: 15,
+        paddingLeft: 20,
+    },
+
+});
 export const towerStyles = StyleSheet.create({
     mainContainer: {
         flex: 1,
@@ -483,31 +507,116 @@ export const towerStyles = StyleSheet.create({
     lastPokemonContainer: {
         marginBottom: 100, // estilo para Condición del flatlist.
     },
-});
-export const headerStyles = StyleSheet.create({
-    container: {
-        marginRight: '5%',
-        marginBottom: 20,
+    buttonContainer: {
+        position: 'absolute',
+        bottom: 100,
     },
-    title: {
-        fontSize: 28,
-        color: '#000',
+});
+export const FightStyles = StyleSheet.create({
+    mainContainer: {
+        flex: 1,
+    },
+    mapBackImageContainer: {
+        justifyContent: 'flex-start',
+    },
+    mapBackImage: {
+        width: 415,
+        height: height * 0.40,
+        alignSelf: 'center',
+        position: 'absolute'
+    },
+    textMessagesContainer: {
+        width: 420,
+        height: height * 0.25,
+        backgroundColor: '#1E2D3E',
+        marginTop: 292,
+        position: 'absolute',
+        flexDirection: 'column',
+    },
+    messageContainer: {
+        marginLeft: 10,
+        marginRight: 10,
+        marginTop: 20,
+        borderRadius: 30,
+        width: 190,
+        height: height * 0.05,
+        alignSelf: 'flex-start',
+        backgroundColor: '#ababab',
+    },
+    userBubble: {
+        alignSelf: 'flex-end',
+        backgroundColor: '#007AFF',
+    },
+    botBubble: {
+        alignSelf: 'flex-start',
+        backgroundColor: '#ababab',
+    },
+    userText: {
+        paddingTop: 4.5,
+        fontSize: 20,
+        color: '#FFF',
+        alignSelf: 'center',
         fontWeight: 'bold',
     },
-    description: {
-        fontSize: 16,
+    botText: {
+        paddingTop: 4.5,
+        fontSize: 20,
         color: '#000',
-        marginTop: 10,
+        alignSelf: 'center',
+        fontWeight: 'bold',
     },
-    search: {
-        borderWidth: 1.5,
-        borderColor: '#1E2D3E',
-        borderRadius: 15,
-        marginTop: 15,
-        paddingLeft: 20,
+    buttonsContainer: {
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        right: 0,
+        flexDirection: 'row',
+        paddingBottom: 74,
     },
-
-});
+    button: {
+        flex: 1,
+        backgroundColor: '#E00004',
+        paddingVertical: 25,
+    },
+    buttonText: {
+        color: '#FFF',
+        fontSize: 16,
+        fontWeight: 'bold',
+        alignSelf: 'center'
+    },
+    secretAbilityButton: {
+        flex: 1,
+        backgroundColor: '#FFF',
+        paddingVertical: 25,
+    },
+    secretAbilityButtonText: {
+        color: '#000',
+        fontSize: 16,
+        fontWeight: 'bold',
+        alignSelf: 'center'
+    },
+    separator: {
+        width: 2,
+        height: '100%',
+        backgroundColor: '#dbdbdb',
+    },
+    additionalButtonsContainer: {
+        flexDirection: 'row',
+        marginTop: 536,
+        justifyContent: 'space-between',
+    },
+    additionalButton: {
+        flex: 1,
+        backgroundColor: '#ababab',
+        paddingVertical: 10,
+    },
+    additionalButtonText: {
+        color: '#FFF',
+        fontSize: 16,
+        fontWeight: 'bold',
+        alignSelf: 'center'
+    },
+})
 
 export const collectedStyles = StyleSheet.create({
     container: {
