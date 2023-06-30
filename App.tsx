@@ -11,7 +11,8 @@ import Login from './views/Login';
 import Registry from './views/Registry';
 import Avatars from './views/AvatarSelection';
 import Tower from './views/Tower';
-import ContextProvider from './context';
+import Fight from './views/Fight';
+import ContextProvider from './context/collected';
 import AuthenticationProvider from './context/authentication';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
@@ -65,6 +66,7 @@ function App(): JSX.Element {
               <Stack.Screen name="Avatars" component={Avatars} />
               <Stack.Screen name="PokemonSelection" component={PokemonSelection} />
               <Stack.Screen name="NivelesTab" component={NavigationWithTabs} />
+              <Stack.Screen name="Pelea" component={Fight} />
             </Stack.Navigator>
           </NavigationContainer>
         </AuthenticationProvider>

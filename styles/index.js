@@ -527,7 +527,7 @@ export const FightStyles = StyleSheet.create({
     },
     textMessagesContainer: {
         width: 420,
-        height: height * 0.25,
+        height: height * 0.35,
         backgroundColor: '#1E2D3E',
         marginTop: 292,
         position: 'absolute',
@@ -567,6 +567,7 @@ export const FightStyles = StyleSheet.create({
     },
     buttonsContainer: {
         position: 'absolute',
+        top: 500,
         bottom: 0,
         left: 0,
         right: 0,
@@ -576,33 +577,54 @@ export const FightStyles = StyleSheet.create({
     button: {
         flex: 1,
         backgroundColor: '#E00004',
-        paddingVertical: 25,
+        paddingVertical: 28,
     },
     buttonText: {
         color: '#FFF',
         fontSize: 16,
         fontWeight: 'bold',
-        alignSelf: 'center'
+        alignSelf: 'center',
+        position: 'absolute',
+        paddingVertical: 15,
     },
     secretAbilityButton: {
         flex: 1,
         backgroundColor: '#FFF',
-        paddingVertical: 25,
+        paddingVertical: 28,
     },
     secretAbilityButtonText: {
         color: '#000',
         fontSize: 16,
         fontWeight: 'bold',
-        alignSelf: 'center'
+        alignSelf: 'center',
+        position: 'absolute',
+        paddingVertical: 15,
     },
     separator: {
+        paddingVertical: 25,
         width: 2,
         height: '100%',
         backgroundColor: '#dbdbdb',
     },
+    rewardInnerContainer: {
+        position: 'absolute',
+        top: height * 0.76,
+        left: 0,
+        right: 0,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        width: '100%',
+        height: height * 0.08,
+    },
+    rewardText: {
+        fontSize: 14,
+        fontWeight: 'bold',
+        textAlign: 'center'
+    },
     additionalButtonsContainer: {
         flexDirection: 'row',
-        marginTop: 536,
+        marginTop: 650,
         justifyContent: 'space-between',
     },
     additionalButton: {
@@ -614,17 +636,26 @@ export const FightStyles = StyleSheet.create({
         color: '#FFF',
         fontSize: 16,
         fontWeight: 'bold',
-        alignSelf: 'center'
+        textAlign: 'center',
     },
-    userImageContainer:{
-
+    userImageContainer: {
+        position: 'absolute',
+        top: height * 0.18,
+        left: 40,
     },
-    enemyImageContainer:{
-
+    enemyImageContainer: {
+        position: 'absolute',
+        top: height * 0.09,
+        right: 50,
     },
-    pokemonImage: {
-        width: 160,
-        height: 160,
+    userPokemonImage: {
+        width: 150,
+        height: 150,
+        resizeMode: 'contain',
+    },
+    enemyPokemonImage: {
+        width: 115,
+        height: 115,
         resizeMode: 'contain',
     },
     pokemonName: {

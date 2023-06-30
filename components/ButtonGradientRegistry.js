@@ -2,7 +2,7 @@ import React from "react";
 import { Text, TouchableOpacity } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import { ButtonGradientRegistryStyle as styles } from "../styles";
-export default function ButtonGradientRegistry({ onPress, text }) {
+export default function ButtonGradientRegistry({ onPress, text, textColor }) {
 
     return (
         <TouchableOpacity
@@ -15,7 +15,7 @@ export default function ButtonGradientRegistry({ onPress, text }) {
                 start={{ x: 0, y: 1 }}
                 end={{ x: 1, y: 0 }}
             >
-                <Text style={styles.text}>{text}</Text>
+                <Text style={[styles.text, { color: textColor }]}>{text}</Text>
             </LinearGradient>
         </TouchableOpacity>
     );
