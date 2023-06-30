@@ -616,6 +616,23 @@ export const FightStyles = StyleSheet.create({
         fontWeight: 'bold',
         alignSelf: 'center'
     },
+    userImageContainer:{
+
+    },
+    enemyImageContainer:{
+
+    },
+    pokemonImage: {
+        width: 160,
+        height: 160,
+        resizeMode: 'contain',
+    },
+    pokemonName: {
+        color: "#E00004",
+        fontWeight: "bold",
+        alignSelf: 'center',
+        fontSize: 20,
+    },
 })
 
 export const collectedStyles = StyleSheet.create({

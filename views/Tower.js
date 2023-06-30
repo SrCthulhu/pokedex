@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
-import { View, Text, Image, FlatList, TouchableOpacity } from 'react-native';
+import { View, Text, Image, FlatList } from 'react-native';
 import { LOCALHOST } from '../constants';
 import { towerStyles as styles } from '../styles';
 import ButtonGradientRegistry from "../components/ButtonGradientRegistry";
 import { AuthenticationContext } from '../context/authentication';
 
-export default function Tower() {
+export default function Tower({ navigation }) {
     const [pokemons, setPokemons] = useState([]);
     const [userPokemon, setUserPokemon] = useState(null);
     const flatListRef = useRef(null);
@@ -47,6 +47,24 @@ export default function Tower() {
             console.error('Error fetching the user pokemon:', error);
         }
     }
+    const startCombat = async () => {
+        try {
+            const response = await fetch(`${LOCALHOST}/startCombat`, {
+                method: 'POST',
+                body: JSON.stringify({ userPokemon, lastWon: lastWonRef.current }),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'token': token,
+                }
+            });
+            const data = await response.json();
+            if (data.success) {
+                navigation.navigate('Pelea');
+            }
+        } catch (error) {
+            console.log("Error:", error);
+        }
+    };
 
     ////////// Componente /////////////
     const PokemonItem = React.memo(({ item, index }) => {
@@ -117,7 +135,7 @@ export default function Tower() {
                     />
                 </View>
                 <View style={styles.buttonContainer}>
-                    <ButtonGradientRegistry text="COMENZAR" />
+                    <ButtonGradientRegistry onPress={startCombat} text="COMENZAR" textColor="#FFF" />
                 </View>
             </View>
         </View>

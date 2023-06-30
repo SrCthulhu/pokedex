@@ -98,7 +98,7 @@ export default function Registry({ navigation }) {
                 {/* <InputComponent 
                 placeholder='Confirma tu contraseña'
                 /> */}
-                <ButtonGradientRegistry onPress={registry} style={styles.buttonRegistryStyle} />
+                <ButtonGradientRegistry onPress={registry} text="REGISTRARSE" textColor="#FFF" style={styles.buttonRegistryStyle} />
             </View>
         </View>
     );
