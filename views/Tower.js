@@ -36,13 +36,12 @@ export default function Tower({ navigation }) {
         try {
             const response = await fetch(`${LOCALHOST}/userPokemon`, {
                 headers: {
-                    'token': token, // Include the token in the headers
+                    'token': token
                 },
             });
             const data = await response.json();
             lastWonRef.current = 0;
             setUserPokemon(data.userPokemon);
-            console.log("data in front side:", data)
         } catch (error) {
             console.error('Error fetching the user pokemon:', error);
         }
