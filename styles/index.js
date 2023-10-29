@@ -541,7 +541,8 @@ export const FightStyles = StyleSheet.create({
         width: 190,
         height: height * 0.05,
         alignSelf: 'flex-start',
-        backgroundColor: '#ababab',
+        backgroundColor: '##d1d1d1',
+        elevation: 4
     },
     userBubble: {
         alignSelf: 'flex-end',
@@ -549,7 +550,7 @@ export const FightStyles = StyleSheet.create({
     },
     botBubble: {
         alignSelf: 'flex-start',
-        backgroundColor: '#ababab',
+        backgroundColor: '#d1d1d1',
     },
     userText: {
         paddingTop: 4.5,
@@ -589,11 +590,11 @@ export const FightStyles = StyleSheet.create({
     },
     secretAbilityButton: {
         flex: 1,
-        backgroundColor: '#FFF',
+        backgroundColor: '#960003',
         paddingVertical: 28,
     },
     secretAbilityButtonText: {
-        color: '#000',
+        color: '#FFF',
         fontSize: 16,
         fontWeight: 'bold',
         alignSelf: 'center',
@@ -615,7 +616,8 @@ export const FightStyles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         width: '100%',
-        height: height * 0.08,
+        height: height * 0.07,
+        elevation: 5
     },
     rewardText: {
         fontSize: 14,
@@ -624,26 +626,26 @@ export const FightStyles = StyleSheet.create({
     },
     additionalButtonsContainer: {
         flexDirection: 'row',
-        marginTop: 650,
+        marginTop: 607,
         justifyContent: 'space-between',
     },
     additionalButton: {
         flex: 1,
-        backgroundColor: '#ababab',
-        paddingVertical: 10,
+        backgroundColor: '#d1d1d1',
+        paddingVertical: 15,
     },
     additionalButtonText: {
-        color: '#FFF',
+        color: '#000',
         fontSize: 16,
         fontWeight: 'bold',
         textAlign: 'center',
     },
-    userImageContainer: {
+    userObjectContainer: {
         position: 'absolute',
         top: height * 0.18,
         left: 40,
     },
-    enemyImageContainer: {
+    enemyObjectContainer: {
         position: 'absolute',
         top: height * 0.09,
         right: 50,
@@ -658,11 +660,26 @@ export const FightStyles = StyleSheet.create({
         height: 115,
         resizeMode: 'contain',
     },
-    pokemonName: {
-        color: "#E00004",
+    pokemonData: {
+        color: "#000",
         fontWeight: "bold",
         alignSelf: 'center',
-        fontSize: 20,
+        fontSize: 10,
+    },
+    pokemonDataContainer: {
+        backgroundColor: '#d1d1d1',
+        paddingHorizontal: 10,
+    },
+    healthBarContainer: {
+        borderColor: "#000",
+        backgroundColor: "#E00004",
+        marginBottom: 30
+    },
+    healthBarText: {
+        color: "#FFF",
+        fontWeight: "bold",
+        alignSelf: 'center',
+        fontSize: 12,
     },
 })
 

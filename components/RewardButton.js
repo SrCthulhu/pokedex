@@ -9,9 +9,9 @@ export default function RewardButton({ onPress, text, textColor }) {
             style={styles.rewardInnerContainer}
             onPress={onPress}>
             <LinearGradient
-                colors={['#000', '#fff']}
-                start={{ x: 0, y: 1 }}
-                end={{ x: 1, y: 0 }}
+                colors={['#f0eeb3', '#dcaf4a', '#936724']}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 0, y: 1 }}
                 style={{ flex: 1, width: '100%' }}
             >
                 <View style={{ flex: 1, paddingHorizontal: '10%', justifyContent: 'center' }}>
