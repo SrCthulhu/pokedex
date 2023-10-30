@@ -26,7 +26,7 @@
 
 ## Descripción - Versión Español
 
-`Juego RPG inspirado en Pokémon para dispositivos moviles (Android). API oficial Pokedex consumida.`
+`Juego RPG inspirado en Pokémon para dispositivos móviles (Android). API oficial Pokedex consumida.`
 
 ## Primeros Pasos 
 
