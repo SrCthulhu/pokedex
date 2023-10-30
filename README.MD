@@ -20,7 +20,11 @@
 
 `./run.sh`
 
-#### 5. With the previously installed dependencies of React Native, Start Metro with the command.
+#### 5. Modify the variable of the index.js file located in the "constants" folder with the https:// path returned by Ngrok.
+
+`example: export const LOCALHOST = 'https://694d-152-168-230-161.ngrok-free.app';`
+
+#### 6. With the previously installed dependencies of React Native, Start Metro with the command.
 
 `npx react-native run-android`
 
@@ -46,6 +50,10 @@
 
 `./run.sh`
 
-#### 5. Con las dependencias instaladas previamente de React Native, iniciar Metro con el comando.
+#### 5. Modifica la variable del archivo index.js ubicado en la carpeta "constants" con la ruta https:// devuelta por Ngrok.
+
+`Ejemplo: export const LOCALHOST = 'https://694d-152-168-230-161.ngrok-free.app';`
+
+#### 6. Con las dependencias instaladas previamente de React Native, iniciar Metro con el comando.
 
 `npx react-native run-android`
