@@ -12,7 +12,7 @@
 
 `ngrok http 5000`
 
-#### 4. Run the bash script that starts the local server (pokedex_python_api)
+#### 4. Run the bash script that starts the local server "pokedex_python_api" (download previously repository)
 
 `./run.sh`
 
@@ -34,7 +34,7 @@
 
 `ngrok http 5000`
 
-#### 4. Correr el script de bash que levanta el servidor local (pokedex_python_api)
+#### 4. Correr el script de bash que levanta el servidor local "pokedex_python_api" (descargar previamente repositorio)
 
 `./run.sh`
 
