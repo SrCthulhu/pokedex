@@ -1,10 +1,14 @@
-## Getting started - English version
+## Description - English version
 
-#### 1. Turn on Android emulator
+`RPG game inspired by Pokémon for mobile devices (Android). Official Pokedex API consumed.`
 
-`Android Studio or the one you use to emulate`
+## Getting started
 
-#### 2. Install Ngrok
+#### 1. Turn on Android emulator.
+
+`Android Studio or the one you use to emulate.`
+
+#### 2. Install Ngrok.
 
 `https://dashboard.ngrok.com/get-started/setup`
 
@@ -12,7 +16,7 @@
 
 `ngrok http 5000`
 
-#### 4. Run the bash script that starts the local server "pokedex_python_api" (download previously repository)
+#### 4. Run the bash script that starts the local server "pokedex_python_api" (download previously repository).
 
 `./run.sh`
 
@@ -20,13 +24,17 @@
 
 `npx react-native run-android`
 
-## Primeros Pasos - Versión Español
+## Descripción - Versión Español
 
-#### 1. Encender emulador Android
+`Juego RPG inspirado en Pokémon para dispositivos moviles (Android). API oficial Pokedex consumida.`
 
-`Android Studio ó el que utilices para emular`
+## Primeros Pasos 
 
-#### 2. Instalar Ngrok
+#### 1. Encender emulador Android.
+
+`Android Studio ó el que utilices para emular.`
+
+#### 2. Instalar Ngrok.
 
 `https://dashboard.ngrok.com/get-started/setup`
 
@@ -34,7 +42,7 @@
 
 `ngrok http 5000`
 
-#### 4. Correr el script de bash que levanta el servidor local "pokedex_python_api" (descargar previamente repositorio)
+#### 4. Correr el script de bash que levanta el servidor local "pokedex_python_api" (descargar previamente repositorio).
 
 `./run.sh`
 
