@@ -9,7 +9,6 @@ export default function Provider({ children }) {
 
     useEffect(() => {
         async function retrieveCollected() {
-            console.log("findCollected")
             const collectedRetrieved = await findCollected();
             setCollected(collectedRetrieved);
         }
@@ -76,6 +75,7 @@ export default function Provider({ children }) {
     };
     const findCollected = async () => {
         const rr = await fetch(`${LOCALHOST}/collected`)
+        console.log("findCollected", { rr })
         const res = await rr.json()
 
         return res.collected;

@@ -1,15 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { View, Text, TextInput, Alert, Image } from 'react-native';
 import { LOCALHOST } from '../constants';
 import { registryStyles as styles } from '../styles';
 import ButtonGradientRegistry from "../components/ButtonGradientRegistry";
+
+import { AuthenticationContext } from '../context/authentication';
+
 
 export default function Registry({ navigation }) {
     const [user, setNewUser] = useState('')
     const [email, setNewEmail] = useState('')
     const [pass, setNewPass] = useState('')
     const [validatePass, setValidateNewPass] = useState('')
-
+    const { setToken } = useContext(AuthenticationContext);
 
     const registry = async () => {
         const rr = await fetch(`${LOCALHOST}/registry`, {
@@ -22,7 +25,9 @@ export default function Registry({ navigation }) {
         const res = await rr.json()
 
         if (res.success) {
-            navigation.navigate("Avatar");
+            await setToken(res.token);
+
+            navigation.navigate("Avatars");
         } else if (res.error1) {
             Alert.alert("Dirección de email inválida, introduzca algo como: @example.com");
             setNewUser("");

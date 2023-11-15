@@ -1,6 +1,6 @@
 // Archivo de Refactorización para todas las constantes.
 export const GET_ALL_URL = 'https://pokeapi.co/api/v2/pokemon';
-export const LOCALHOST = 'https://5334-190-245-26-75.ngrok-free.app';
+export const LOCALHOST = 'https://0374-2800-2282-1000-8c0-50ce-d15f-109e-562d.ngrok-free.app';
 
 // Colores de fondo de cada carta según tipo de pokemón.
 

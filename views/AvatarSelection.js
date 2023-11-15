@@ -6,10 +6,12 @@ import { AuthenticationContext } from '../context/authentication';
 
 export default function Avatars({ navigation }) {
     const [avatarList, setAvatarList] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
     const { token } = useContext(AuthenticationContext);
 
     useEffect(() => {
         const getAvatars = async () => {
+            setIsLoading(true);
             const response = await fetch(`${LOCALHOST}/avatars`, {
                 headers: {
                     'Content-Type': 'application/json',
@@ -18,8 +20,8 @@ export default function Avatars({ navigation }) {
             });
             const data = await response.json();
             const { avatars } = data;
-
             setAvatarList(avatars);
+            setIsLoading(false);
         }
 
         getAvatars();
@@ -46,34 +48,35 @@ export default function Avatars({ navigation }) {
         }
     };
 
-    const flatListData = avatarList.sort((a, b) => {
-        if (a.category < b.category) return -1;
-        if (a.category > b.category) return 1;
-        // Si la categoría es la misma organiza el avatar por el nombre.
-        if (a.name < b.name) return -1;
-        if (a.name > b.name) return 1;
-        return 0;
-    }).reduce((data, avatar) => {
-        const categoryName = avatar.category;
+    const flatListData = avatarList
+        ? avatarList.sort((a, b) => {
+            if (a.category < b.category) return -1;
+            if (a.category > b.category) return 1;
+            // Si la categoría es la misma organiza el avatar por el nombre.
+            if (a.name < b.name) return -1;
+            if (a.name > b.name) return 1;
+            return 0;
+        }).reduce((data, avatar) => {
+            const categoryName = avatar.category;
 
-        const existingCategory = data.find((item) => item.category === categoryName);
+            const existingCategory = data.find((item) => item.category === categoryName);
 
-        if (!existingCategory) {
-            // Agrega nuevo header de categoría
+            if (!existingCategory) {
+                // Agrega nuevo header de categoría
+                data.push({
+                    category: categoryName,
+                    isCategory: true,
+                });
+            }
+
+            // Agrega el avatar a la categoría actual
             data.push({
-                category: categoryName,
-                isCategory: true,
+                avatar,
+                isCategory: false,
             });
-        }
 
-        // Agrega el avatar a la categoría actual
-        data.push({
-            avatar,
-            isCategory: false,
-        });
-
-        return data;
-    }, []);
+            return data;
+        }, []) : [];
 
     const renderItem = ({ item }) => {
         if (item.isCategory) {
@@ -88,7 +91,13 @@ export default function Avatars({ navigation }) {
             return <Character avatar={item.avatar} handleAvatarSelected={handleAvatarSelected} />;
         }
     };
-
+    if (isLoading) {
+        return (
+            <View style={styles.container}>
+                <Text>Cargando avatares...⏳</Text>
+            </View>
+        );
+    }
     return (
         <View style={styles.container}>
             <View style={styles.header}>
