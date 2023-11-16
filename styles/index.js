@@ -335,13 +335,15 @@ export const pokemonSelectionStyles = StyleSheet.create({
 });
 export const cardStyles = StyleSheet.create({
     container: {
-        width: 160,
-        height: height * 0.40,
-        justifyContent: "space-between",
-        alignItems: "center",
+        width: '45%',
+        height: 310,
+        justifyContent: "center",
         borderRadius: 30,
         paddingTop: 10,
         paddingBottom: 10,
+        alignItems: 'center',
+        margin: '2.5%',
+        elevation: 5
     },
     image: {
         width: 150,
@@ -353,6 +355,7 @@ export const cardStyles = StyleSheet.create({
         fontSize: 20,
         fontWeight: "bold",
         marginBottom: 5,
+        elevation: 5
     },
     type: {
         color: "#FFF",
@@ -388,7 +391,7 @@ export const cardStyles = StyleSheet.create({
 
 export const homeStyles = StyleSheet.create({
     container: {
-        marginLeft: '5%',
+        marginHorizontal: '5%',
         marginTop: 20
     },
     conditions: {
@@ -685,9 +688,8 @@ export const FightStyles = StyleSheet.create({
 
 export const collectedStyles = StyleSheet.create({
     container: {
-        marginLeft: '5%',
-        marginRight: '5%',
-        marginTop: 20,
+        marginHorizontal: '5%',
+        marginTop: 20
     },
 });
 

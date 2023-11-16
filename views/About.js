@@ -12,7 +12,7 @@ export default function About() {
             />
             <View style={styles.imageContainer}>
                 <Image
-                    source={{ uri: 'https://instagram.faep24-1.fna.fbcdn.net/v/t51.2885-19/72487654_2261525107284685_1971596924683288576_n.jpg?stp=dst-jpg_s150x150&_nc_ht=instagram.faep24-1.fna.fbcdn.net&_nc_cat=101&_nc_ohc=4iDwwzHoiQAAX9_a1hS&edm=ACWDqb8BAAAA&ccb=7-5&oh=00_AfARsdZd39xPk5Ze6ocPTH52YsUW0VFLgLgh5s3uxROl8Q&oe=642B4516&_nc_sid=1527a3' }}
+                    source={{ uri: 'https://res.cloudinary.com/dpwaxzhnx/image/upload/v1700118047/Pokedex_db/ofmljnv2ok9gtjz95gok.jpg' }}
                     style={styles.image}
                 />
             </View>
