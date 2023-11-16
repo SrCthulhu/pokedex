@@ -1,22 +1,38 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { View, Text, Image, Modal, TouchableOpacity, FlatList } from 'react-native';
 import { LOCALHOST } from '../constants';
-import { Pokemon } from '../components/Pokemon'; //Para desplegar en modal
+import { Pokemon } from '../components/Pokemon'; //Para desplegar en modal a futuro
 import { FightStyles as styles } from '../styles';
 import { MessageBubble } from '../components/MessageBubble';
 import RewardButton from '../components/RewardButton';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { AuthenticationContext } from '../context/authentication';
 
 export default function Fight({ navigation }) {
     const [userPokemon, setUserPokemon] = useState(null);
     const [enemyPokemon, setEnemyPokemon] = useState(null);
-    const [messages, setMessages] = useState([
-        { id: 1, content: 'Pokemon 1: lorem', sender: 'user' },
-        { id: 2, content: 'Pokemon 2: lorem', sender: 'bot' },
-    ]);
-    const [userMessage, setUserMessage] = useState('');
+    const [enemyAbilities, setEnemyAbilities] = useState({});
+    const [messages, setMessages] = useState([]);
     const { token } = useContext(AuthenticationContext);
+
+    const handleAbilityPress = () => {
+        if (userPokemon && userPokemon.ability) {
+            const message = userPokemon.ability;
+            sendMessage(message);
+        }
+    };
+    const handleHiddenAbility2Press = () => {
+        if (userPokemon && userPokemon.ability2) {
+            const message = userPokemon.ability2;
+            sendMessage(message);
+        }
+    };
+
+    const handleHiddenAbilityPress = () => {
+        if (userPokemon && userPokemon.hidden_ability) {
+            const message = userPokemon.hidden_ability;
+            sendMessage(message);
+        }
+    };
 
     const actualCombat = async () => {
         try {
@@ -28,25 +44,32 @@ export default function Fight({ navigation }) {
             const data = await response.json();
             setUserPokemon(data.userPokemon);
             setEnemyPokemon(data.enemyPokemon);
+            setEnemyAbilities(data.enemyAbilities);
             return data.actualCombat; // Return the combat ID
         } catch (error) {
             console.error('Error fetching pokemons:', error);
             return null;
         }
     }
-    const handleAbilityPress = () => {
-        if (userPokemon && userPokemon.ability) {
-            const message = userPokemon.ability;
-            sendMessage(message);
+    const fetchMessages = async () => {
+        try {
+            const combatId = await actualCombat();
+            const response = await fetch(`${LOCALHOST}/messages?token=${token}&combat_Id=${combatId}`);
+            const data = await response.json();
+            if (!response.ok) {
+                console.error('Error fetching messages:', data.error);
+            } else {
+                // Update the (messages) state with the fetched messages
+                setMessages(data.messages);
+            }
+        } catch (error) {
+            console.error('Error fetching messages:', error);
         }
     };
-
-    const handleHiddenAbilityPress = () => {
-        if (userPokemon && userPokemon.hidden_ability) {
-            const message = userPokemon.hidden_ability;
-            sendMessage(message);
-        }
-    };
+    useEffect(() => {
+        actualCombat();
+        fetchMessages();
+    }, []);
     const sendMessage = async (message) => {
         try {
             const actualCombatId = await actualCombat(); // Call the function and await the result
@@ -55,51 +78,35 @@ export default function Fight({ navigation }) {
                 headers: {
                     'Content-Type': 'application/json',
                     'token': token,
-                    'actualCombat': actualCombatId, // Pass the combat ID to the server
                 },
-                body: JSON.stringify({ message }),
+                body: JSON.stringify({ combat_Id: actualCombatId, message }),
             });
             const data = await response.json();
-            // Update the messages state with the new message
-            setMessages((prevMessages) => [
-                ...prevMessages,
-                { id: prevMessages.length + 1, content: message, sender: 'user' },
-            ]);
-            // Clear the user message input
-            setUserMessage('');
+            if (response.ok) {
+                // Llamar a la función fetchMessages para actualizar la lista de mensajes
+                fetchMessages();
+                // Después de un segundo, crea mensajes automáticos del enemigo
+                setTimeout(async () => {
+                    const enemyMessages = createEnemyMessages(data.enemyAbilities);
+                    setMessages([...messages, ...enemyMessages]);
+                }, 1000);
+            } else {
+                console.error('Error sending message:', data.error);
+            }
+
+            setMessages('');
         } catch (error) {
             console.error('Error sending message:', error);
         }
     };
-    const generateEnemyMessage = () => {
-        // Generate the enemy's message randomly (example)
-        const randomMessage = 'Enemy message';
-        setMessages((prevMessages) => [
-            ...prevMessages,
-            { id: prevMessages.length + 1, content: randomMessage, sender: 'bot' },
-        ]);
-    };
-
-    useEffect(() => {
-        actualCombat();
-        // Fetch messages from the server and update the messages state
-        const fetchMessages = async () => {
-            try {
-                const response = await fetch(`${LOCALHOST}/messages`, {
-                    headers: {
-                        'token': token,
-                        'actualCombat': actualCombat(),
-                    },
-                });
-                const data = await response.json();
-                // Update the (messages) state with the fetched messages
-                setMessages(data.messages);
-            } catch (error) {
-                console.error('Error fetching messages:', error);
-            }
-        };
-        fetchMessages();
-    }, []);
+    /*   const generateEnemyMessage = () => {
+           // Generate the enemy's message randomly (example)
+           const randomMessage = 'Enemy message';
+           setMessages((prevMessages) => [
+               ...prevMessages,
+               { id: prevMessages.length + 1, content: randomMessage, sender: 'bot' },
+           ]);
+       }; */
 
     const renderUserPokemon = () => {
         if (userPokemon) {
@@ -140,13 +147,27 @@ export default function Fight({ navigation }) {
         return null;
     }
 
-    const renderMessageBubble = ({ item }) => (
-        <MessageBubble
-            key={item.id}
-            content={item.content}
-            sender={item.sender}
-        />
-    );
+    const renderMessageBubble = ({ item }) => {
+        const isUserMessage = item.sender === 'user';
+        return (
+            <MessageBubble     // Datos de la db para el componente
+                key={item._id}
+                content={item.message}
+                sender={item.sender} // Verifica si el usuario actual es el remitente
+            />
+        );
+    };
+    /* const renderEnemyAbilitiesBubble = () => {
+         if (enemyAbilities && (enemyAbilities.ability || enemyAbilities.hidden_ability)) {
+             return (
+                 <MessageBubble
+                     content={`Enemy Abilities: ${enemyAbilities.ability || ''}, ${enemyAbilities.hidden_ability || ''}`}
+                     sender="bot"
+                 />
+             );
+         }
+         return null;
+     }; */
 
     return (
         <View style={styles.mainContainer}>
@@ -160,19 +181,26 @@ export default function Fight({ navigation }) {
             {renderEnemyPokemon()}
 
             <View style={styles.textMessagesContainer}>
+                <View style={[styles.messageContainer, styles.anotherBubble]}>
+                    <Text style={styles.anotherText}>Escupir Hilo</Text>
+                </View>
                 <FlatList
-                    data={messages}
-                    renderItem={renderMessageBubble}
-                    keyExtractor={(item) => item.id.toString()}
+                    data={messages.userMessages} //Nombre retornado en el GET MESSAGES PYTHON
+                    renderItem={({ item, index }) => renderMessageBubble({ item, index })}
+                    keyExtractor={(item, index) => item.id || index.toString()}
+
                 />
+                <View style={[styles.messageContainer, styles.anotherBubble]}>
+                    <Text style={styles.anotherText}>Picadura</Text>
+                </View>
             </View>
             <View style={styles.buttonsContainer}>
                 <TouchableOpacity style={styles.button} onPress={handleAbilityPress}>
                     <Text style={styles.buttonText}>{userPokemon?.ability ?? ''}</Text>
                 </TouchableOpacity>
                 <View style={styles.separator} />
-                <TouchableOpacity style={styles.button} onPress={handleAbilityPress}>
-                    <Text style={styles.buttonText}>(pendiente Agregar)</Text>
+                <TouchableOpacity style={styles.button} onPress={handleHiddenAbility2Press}>
+                    <Text style={styles.buttonText}>{userPokemon?.ability2 ?? ''}</Text>
                 </TouchableOpacity>
                 <View style={styles.separator} />
                 <TouchableOpacity style={styles.secretAbilityButton} onPress={handleHiddenAbilityPress}>

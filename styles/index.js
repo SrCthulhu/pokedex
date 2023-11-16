@@ -540,29 +540,26 @@ export const FightStyles = StyleSheet.create({
         borderRadius: 30,
         width: 190,
         height: height * 0.05,
-        alignSelf: 'flex-start',
-        backgroundColor: '##d1d1d1',
         elevation: 4
     },
-    userBubble: {
-        alignSelf: 'flex-end',
-        backgroundColor: '#007AFF',
-    },
     botBubble: {
-        alignSelf: 'flex-start',
-        backgroundColor: '#d1d1d1',
+        alignSelf: 'flex-end',              //<---- USER MESSAGE
+        backgroundColor: '#578b78',
     },
-    userText: {
+    anotherBubble: {
+        backgroundColor: '#b2d473',
+    },
+    anotherText: {
         paddingTop: 4.5,
         fontSize: 20,
-        color: '#FFF',
+        color: '#000',
         alignSelf: 'center',
         fontWeight: 'bold',
     },
     botText: {
         paddingTop: 4.5,
         fontSize: 20,
-        color: '#000',
+        color: '#fff',                    //<---- USER MESSAGE
         alignSelf: 'center',
         fontWeight: 'bold',
     },
@@ -642,23 +639,26 @@ export const FightStyles = StyleSheet.create({
     },
     userObjectContainer: {
         position: 'absolute',
-        top: height * 0.18,
-        left: 40,
+        top: height * 0.08,
+        left: 15,
     },
     enemyObjectContainer: {
         position: 'absolute',
-        top: height * 0.09,
-        right: 50,
+        top: height * 0.02,
+        right: 15,
+
     },
     userPokemonImage: {
         width: 150,
         height: 150,
         resizeMode: 'contain',
+        alignSelf: 'center',
     },
     enemyPokemonImage: {
         width: 115,
         height: 115,
         resizeMode: 'contain',
+        alignSelf: 'center',
     },
     pokemonData: {
         color: "#000",
@@ -668,7 +668,7 @@ export const FightStyles = StyleSheet.create({
     },
     pokemonDataContainer: {
         backgroundColor: '#d1d1d1',
-        paddingHorizontal: 10,
+        paddingHorizontal: 4,
     },
     healthBarContainer: {
         borderColor: "#000",
